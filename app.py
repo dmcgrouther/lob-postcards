@@ -1,5 +1,4 @@
 #import libraries
-import requests
 import os
 import lob
 from dotenv import load_dotenv
@@ -14,15 +13,16 @@ load_dotenv()
 LOB_API_KEY = os.getenv("LOB_API_KEY")
 lob.api_key = LOB_API_KEY  # Initialize the Lob API key
 
-# Sample address
-test_address = 'adr_10bef0fa55e04b71'
+# from address - Lob HQ
+from_address_lob_id = 'adr_10bef0fa55e04b71'
+from_address_lob = get_address(from_address_lob_id, LOB_API_KEY)
+from_name = from_address_lob.get('name', 'Default Name')  # Extract the name from the "from address"
 
-#retrieve sample address
-from_address = get_address(test_address, LOB_API_KEY)
-recepient_name = from_address.get("name")
-
-# Extract the name from the "from address"
-from_name = from_address.get('name', 'Default Name')
+#send to sample address
+sample_address_id = 'adr_2ad9772142b75ffe'
+recipient_address = get_address(sample_address_id, LOB_API_KEY)
+recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country code
+recipient_name = recipient_address.get("name", "Recipient")  # Extract recipient name or set default
 
 # Example HTML template for the front of the postcard with a placeholder for the name
 html_front_template = """
@@ -45,14 +45,14 @@ html_back_template = """
 """
 
 # Replace placeholders with dynamic content
-front_html = html_front_template.replace('{{name}}', from_name)
-back_html = html_back_template.replace('{{name}}', recepient_name)
+front_html = html_front_template.replace('{{name}}', recipient_name)
+back_html = html_back_template.replace('{{name}}', recipient_name)
 
 # Create a postcard using the corrected parameters
 postcard = lob.Postcard.create(
     description="Personalized Postcard",
-    to_address=test_address,
-    from_address=test_address,  # Use the existing address ID
+    to_address=sample_address_id,
+    from_address=from_address_lob_id,  # Use the existing address ID
     front=front_html,
     back=back_html,
     size="4x6",  # You can choose the size of the postcard, such as "4x6" or "5x7"
