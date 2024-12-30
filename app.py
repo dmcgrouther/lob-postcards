@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 #import get_address and postcard templates
 from get_address import get_address
-from templates import html_front_template, html_back_template
+from templates import html_front_template_1, html_front_template_2, html_front_template_3, html_back_template
 
 # Load the environment variables from the .env file
 load_dotenv()
@@ -26,7 +26,6 @@ recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country 
 recipient_name = recipient_address.get("name", "Neighbor")  # Extract recipient name or set default
 
 # Replace placeholders with dynamic content
-front_html = html_front_template.replace('{{name}}', recipient_name)
 back_html = html_back_template.replace('{{name}}', recipient_name)
 
 # Create a postcard using the corrected parameters
@@ -34,7 +33,7 @@ postcard = lob.Postcard.create(
     description="Personalized Postcard",
     to_address=sample_address_id,
     from_address=from_address_lob_id,  #Lob's address in SF
-    front=front_html,
+    front=html_front_template_2, #another template html_front_template_1
     back=back_html,
     size="4x6",  # You can choose the size of the postcard, such as "4x6" or "5x7"
     use_type="marketing"
