@@ -23,7 +23,7 @@ from_name = from_address_lob.get('name', 'Default Name')  # Extract the name fro
 sample_address_id = 'adr_2ad9772142b75ffe'
 recipient_address = get_address(sample_address_id, LOB_API_KEY)
 recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country code
-recipient_name = recipient_address.get("name", "Recipient")  # Extract recipient name or set default
+recipient_name = recipient_address.get("name", "Neighbor")  # Extract recipient name or set default
 
 # Replace placeholders with dynamic content
 front_html = html_front_template.replace('{{name}}', recipient_name)
@@ -33,7 +33,7 @@ back_html = html_back_template.replace('{{name}}', recipient_name)
 postcard = lob.Postcard.create(
     description="Personalized Postcard",
     to_address=sample_address_id,
-    from_address=from_address_lob_id,  # Use the existing address ID
+    from_address=from_address_lob_id,  #Lob's address in SF
     front=front_html,
     back=back_html,
     size="4x6",  # You can choose the size of the postcard, such as "4x6" or "5x7"
