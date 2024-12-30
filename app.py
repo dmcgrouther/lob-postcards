@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 #import get_address and postcard templates
 from get_address import get_address
-from templates import html_front_template_1, html_front_template_2, html_front_template_3, html_back_template
+from templates import html_front_template_1, html_front_template_2, html_back_template
 
 # Load the environment variables from the .env file
 load_dotenv()
