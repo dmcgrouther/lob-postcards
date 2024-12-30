@@ -26,7 +26,7 @@ recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country 
 recipient_name = recipient_address.get("name", "Neighbor")  # Extract recipient name or set default
 
 # Replace placeholders with dynamic content
-back_html = html_back_template.replace('{{name}}', recipient_name)
+back_html = html_back_template_2.replace('{{name}}', recipient_name)
 
 # Create a postcard using the corrected parameters
 postcard = lob.Postcard.create(
