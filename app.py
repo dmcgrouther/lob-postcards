@@ -21,26 +21,6 @@ test_address = 'adr_10bef0fa55e04b71'
 from_address = get_address(test_address, LOB_API_KEY)
 recepient_name = from_address.get("name")
 
-# Example recipient address
-to_address = {
-    'name': recepient_name,
-    'address_line1': "1600 Amphitheatre Parkway",
-    'address_city': "Mountain View",
-    'address_state': 'CA',
-    'address_zip': '94043',
-    'address_country': 'US'
-}
-
-# Create the "to address" in Lob
-to_address_obj = lob.Address.create(
-    name=to_address['name'],
-    address_line1=to_address['address_line1'],
-    address_city=to_address['address_city'],
-    address_state=to_address['address_state'],
-    address_zip=to_address['address_zip'],
-    address_country=to_address['address_country']
-)
-
 # Extract the name from the "from address"
 from_name = from_address.get('name', 'Default Name')
 
@@ -71,7 +51,7 @@ back_html = html_back_template.replace('{{name}}', recepient_name)
 # Create a postcard using the corrected parameters
 postcard = lob.Postcard.create(
     description="Personalized Postcard",
-    to_address=to_address_obj['id'],
+    to_address=test_address,
     from_address=test_address,  # Use the existing address ID
     front=front_html,
     back=back_html,
