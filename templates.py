@@ -3,15 +3,6 @@ html_front_template_1 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b41
 
 html_front_template_2 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/613ba39c6c92493d37b94bc4_4x6%20Retail%20front.pdf"
 
-html_front_template_3 = """
-<html>
-  <body>
-    <h1>Hello {{name}}!</h1>
-    <p>This is a personalized postcard sent using Lob.</p>
-  </body>
-</html>
-"""
-
 # Example HTML template for the back of the postcard
 html_back_template = """
 <html>
