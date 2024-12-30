@@ -56,6 +56,6 @@ html_back_template_1 = html_back_template_a.replace("{{qr_code_url}}", qr_code_a
 html_back_template_2 = html_back_template_b.replace("{{qr_code_url}}", qr_code_b)
 
 # Print or save the rendered HTML
-print("Postcard for Promo A:")
-print(html_back_template_1)
-print(html_back_template_2)
+# print("Postcard for Promo A:")
+# print(html_back_template_1)
+# print(html_back_template_2)
