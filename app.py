@@ -3,8 +3,9 @@ import os
 import lob
 from dotenv import load_dotenv
 
-#import get_address
+#import get_address and postcard templates
 from get_address import get_address
+from templates import html_front_template, html_back_template
 
 # Load the environment variables from the .env file
 load_dotenv()
@@ -23,26 +24,6 @@ sample_address_id = 'adr_2ad9772142b75ffe'
 recipient_address = get_address(sample_address_id, LOB_API_KEY)
 recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country code
 recipient_name = recipient_address.get("name", "Recipient")  # Extract recipient name or set default
-
-# Example HTML template for the front of the postcard with a placeholder for the name
-html_front_template = """
-<html>
-  <body>
-    <h1>Hello {{name}}!</h1>
-    <p>This is a personalized postcard sent using Lob.</p>
-  </body>
-</html>
-"""
-
-# Example HTML template for the back of the postcard
-html_back_template = """
-<html>
-  <body>
-    <p>This is the back of the postcard.</p>
-    <p>Addressed to {{name}}</p>
-  </body>
-</html>
-"""
 
 # Replace placeholders with dynamic content
 front_html = html_front_template.replace('{{name}}', recipient_name)
