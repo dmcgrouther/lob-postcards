@@ -24,7 +24,7 @@ qr_code_a = generate_qr_code(link_a)
 qr_code_b = generate_qr_code(link_b)
 
 # HTML templates
-html_back_template_a = """
+html_back_template = """
 <html>
   <body>
     <div style="padding: 20px; font-family: Arial, sans-serif;">
@@ -36,26 +36,3 @@ html_back_template_a = """
   </body>
 </html>
 """
-
-html_back_template_b = """
-<html>
-  <body>
-    <div style="padding: 20px; font-family: Arial, sans-serif;">
-      <p>Hello {{name}}</p>
-      <div style="margin-top: 20px;">
-        <img src="{{qr_code_url}}" alt="QR Code" style="width: 150px; height: 150px;">
-      </div>
-    </div>
-  </body>
-</html>
-"""
-
-# Replace QR code placeholders
-# html_back_template = html_back_template_1.replace("{{qr_code_url}}", qr_code_a)
-html_back_template_1 = html_back_template_a.replace("{{qr_code_url}}", qr_code_a)
-html_back_template_2 = html_back_template_b.replace("{{qr_code_url}}", qr_code_b)
-
-# Print or save the rendered HTML
-# print("Postcard for Promo A:")
-# print(html_back_template_1)
-# print(html_back_template_2)
