@@ -19,24 +19,34 @@ from_address_lob_id = 'adr_10bef0fa55e04b71'
 from_address_lob = get_address(from_address_lob_id, LOB_API_KEY)
 from_name = from_address_lob.get('name', 'Default Name')  # Extract the name from the "from address"
 
+def create_postcard(address_id_to_send_to, version):
+  recipient_address = get_address(address_id_to_send_to, LOB_API_KEY)
+  recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country code
+  recipient_name = recipient_address.get("name", "Neighbor")  # Extract recipient name or set default
+
+  if version == 1: 
+    back_html = html_back_template_1.replace('{{name}}', recipient_name)
+    front_html = html_front_template_1
+  elif version == 2:
+    back_html = html_back_template_2.replace('{{name}}', recipient_name)
+    front_html = html_front_template_2
+
+  # Create a postcard using the corrected parameters
+  postcard = lob.Postcard.create(
+      description="Personalized Postcard",
+      to_address=address_id_to_send_to,
+      from_address=from_address_lob_id,  #Lob's address in SF
+      front=front_html,
+      back=back_html,
+      size="4x6",  #"4x6", "6x9"
+      use_type="marketing"
+  )
+
+  return postcard
+
 #send to sample address
-sample_address_id = 'adr_2ad9772142b75ffe'
-recipient_address = get_address(sample_address_id, LOB_API_KEY)
-recipient_address['address_country'] = 'US'  # Add the correct ISO-3166 country code
-recipient_name = recipient_address.get("name", "Neighbor")  # Extract recipient name or set default
+# create_postcard('adr_2ad9772142b75ffe', 1)
+# create_postcard('adr_2ad9772142b75ffe', 2)
 
-# Replace placeholders with dynamic content
-back_html = html_back_template_2.replace('{{name}}', recipient_name)
 
-# Create a postcard using the corrected parameters
-postcard = lob.Postcard.create(
-    description="Personalized Postcard",
-    to_address=sample_address_id,
-    from_address=from_address_lob_id,  #Lob's address in SF
-    front=html_front_template_2, #another template html_front_template_1
-    back=back_html,
-    size="4x6",  # You can choose the size of the postcard, such as "4x6" or "5x7"
-    use_type="marketing"
-)
-
-print(f"Postcard created! View it here: {postcard['url']}")
+print(create_postcard('adr_2ad9772142b75ffe', 2))
