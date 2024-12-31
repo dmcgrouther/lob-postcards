@@ -9,9 +9,6 @@ load_dotenv()
 # Set the Lob API key
 LOB_API_KEY = os.getenv("LOB_API_KEY")
 
-# Sample address
-test_address = 'adr_10bef0fa55e04b71'
-
 # Function to fetch an address
 def get_address(address_id, api_key):
     url = f"https://api.lob.com/v1/addresses/{address_id}"
@@ -20,7 +17,6 @@ def get_address(address_id, api_key):
     return response.json()
 
 # Test: use the function
+# test_address = 'adr_10bef0fa55e04b71'
 # address = get_address(test_address, LOB_API_KEY)
-# print(address)
 # name = address.get("name")
-# print(name)

@@ -44,9 +44,4 @@ def create_postcard(address_id_to_send_to, version):
 
   return postcard
 
-#send to sample address
-# create_postcard('adr_2ad9772142b75ffe', 1)
-# create_postcard('adr_2ad9772142b75ffe', 2)
-
-
 print(create_postcard('adr_2ad9772142b75ffe', 2))
