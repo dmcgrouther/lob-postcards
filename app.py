@@ -2,6 +2,7 @@
 import os
 import lob
 from dotenv import load_dotenv
+import json
 
 #import get_address and postcard templates
 from get_address import get_address
@@ -48,4 +49,23 @@ def create_postcard(address_id_to_send_to, version):
 
     return postcard
 
-print(create_postcard('adr_2ad9772142b75ffe', 1))
+#Create one post card. Version 1 or 2
+# print(create_postcard('adr_82cccf57d2b090f0', 1))
+# print(create_postcard('adr_82cccf57d2b090f0', 2))
+
+def load_address_ids(filename):
+    with open(filename, "r") as file:
+        return json.load(file)
+    
+addresses = load_address_ids("data.json")
+
+def create_postcards(address_list):
+    count=0
+    for address in address_list:
+        if count % 2 == 0:
+            print(create_postcard(address['id'], 1))
+        if count % 2 != 0:
+            print(create_postcard(address['id'], 2))
+        count=count+1
+
+create_postcards(addresses)
