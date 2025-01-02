@@ -15,10 +15,10 @@ load_dotenv()
 LOB_API_KEY = os.getenv("LOB_API_KEY")
 lob.api_key = LOB_API_KEY  # Initialize the Lob API key
 
-# from address - Lob HQ
-from_address_lob_id = 'adr_10bef0fa55e04b71'
-from_address_lob = get_address(from_address_lob_id, LOB_API_KEY)
-from_name = from_address_lob.get('name', 'Default Name')  # Extract the name from the "from address"
+# from address - Compass
+from_address_compass_id = 'adr_c7df05a406f9e9bb'
+from_address_lob = get_address(from_address_compass_id, LOB_API_KEY)
+from_name = from_address_lob.get('name', 'Compass')  # Extract the name from the "from address"
 
 def create_postcard(address_id_to_send_to, version):
     recipient_address = get_address(address_id_to_send_to, LOB_API_KEY)
@@ -40,7 +40,7 @@ def create_postcard(address_id_to_send_to, version):
     postcard = lob.Postcard.create(
         description="Personalized Postcard",
         to_address=address_id_to_send_to,
-        from_address=from_address_lob_id,  # Lob's address in SF
+        from_address=from_address_compass_id,  # Compass's address in SF
         front=front_html,
         back=back_html,
         size="4x6",  # "4x6", "6x9"
