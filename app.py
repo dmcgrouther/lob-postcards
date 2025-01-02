@@ -17,8 +17,8 @@ lob.api_key = LOB_API_KEY  # Initialize the Lob API key
 
 # from address - Compass
 from_address_compass_id = 'adr_c7df05a406f9e9bb'
-from_address_lob = get_address(from_address_compass_id, LOB_API_KEY)
-from_name = from_address_lob.get('name', 'Compass')  # Extract the name from the "from address"
+from_address_compass = get_address(from_address_compass_id, LOB_API_KEY)
+from_name = from_address_compass.get('name', 'Compass')  # Extract the name from the "from address"
 
 def create_postcard(address_id_to_send_to, version):
     recipient_address = get_address(address_id_to_send_to, LOB_API_KEY)
