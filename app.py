@@ -6,7 +6,7 @@ import json
 
 #import get_address and postcard templates
 from get_address import get_address
-from templates import html_front_template_1, html_front_template_2, html_back_template, qr_code_a, qr_code_b
+from templates import html_front_template_1, html_front_template_2, html_back_template, qr_code_1, qr_code_2
 
 # Load the environment variables from the .env file
 load_dotenv()
@@ -31,10 +31,10 @@ def create_postcard(address_id_to_send_to, version):
     # Handle A/B testing for QR codes
     if version == 1: 
         front_html = html_front_template_1
-        back_html = back_html.replace("{{qr_code_url}}", qr_code_a)
+        back_html = back_html.replace("{{qr_code_url}}", qr_code_1)
     elif version == 2:
         front_html = html_front_template_2
-        back_html = back_html.replace("{{qr_code_url}}", qr_code_b)
+        back_html = back_html.replace("{{qr_code_url}}", qr_code_2)
 
     # Create a postcard using the corrected parameters
     postcard = lob.Postcard.create(

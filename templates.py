@@ -8,8 +8,8 @@ html_front_template_1 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b41
 html_front_template_2 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/613ba39c6c92493d37b94bc4_4x6%20Retail%20front.pdf"
 
 # Links for A/B testing
-link_a = "https://example.com/promo-a"
-link_b = "https://example.com/promo-b"
+link_1 = "https://example.com/promo-1"
+link_2 = "https://example.com/promo-2"
 
 # Function to generate a QR code as base64
 def generate_qr_code(link):
@@ -20,8 +20,8 @@ def generate_qr_code(link):
     return f"data:image/png;base64,{base64.b64encode(buffer.read()).decode('utf-8')}"
 
 # Generate QR codes for each link
-qr_code_a = generate_qr_code(link_a)
-qr_code_b = generate_qr_code(link_b)
+qr_code_1 = generate_qr_code(link_1)
+qr_code_2 = generate_qr_code(link_2)
 
 # HTML templates
 html_back_template = """
