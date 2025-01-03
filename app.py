@@ -6,7 +6,7 @@ import json
 
 #import get_address and postcard templates
 from get_address import get_address
-from templates import html_front_template_1, html_front_template_2, html_back_template, qr_code_1, qr_code_2
+from templates import html_front_templates, html_back_template, qr_codes
 
 # Load the environment variables from the .env file
 load_dotenv()
@@ -27,16 +27,12 @@ def create_postcard(address_id_to_send_to, version):
 
     # Replace placeholders in back HTML template
     back_html = html_back_template.replace('{{name}}', recipient_name)
+    back_html = back_html.replace("{{qr_code_url}}", qr_codes[version % len(qr_codes)])
 
-    # Handle A/B testing for QR codes
-    if version == 1: 
-        front_html = html_front_template_1
-        back_html = back_html.replace("{{qr_code_url}}", qr_code_1)
-    elif version == 2:
-        front_html = html_front_template_2
-        back_html = back_html.replace("{{qr_code_url}}", qr_code_2)
+    # Select front template
+    front_html = html_front_templates[version % len(html_front_templates)]
 
-    # Create a postcard using the corrected parameters
+    # Create the postcard
     postcard = lob.Postcard.create(
         description="Personalized Postcard",
         to_address=address_id_to_send_to,
@@ -60,12 +56,8 @@ def load_address_ids(filename):
 addresses = load_address_ids("data.json")
 
 def create_postcards(address_list):
-    count=0
-    for address in address_list:
-        if count % 2 == 0:
-            print(create_postcard(address['id'], 1))
-        if count % 2 != 0:
-            print(create_postcard(address['id'], 2))
-        count=count+1
+    for i, address in enumerate(address_list):
+        version = i % len(html_front_templates)  # Cycle through versions dynamically. This ensures randomness for trying different version
+        print(create_postcard(address['id'], version))
 
 create_postcards(addresses)

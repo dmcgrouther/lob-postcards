@@ -2,14 +2,32 @@ import qrcode
 import io
 import base64
 
-# Example HTML template for the front of the postcard with a placeholder for the name
-html_front_template_1 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/5eb8636a79f886f204485913_gtmpl_44f242991d48f5_4x6_front.pdf"
+# # Example HTML templates for the front of the postcards
+# html_front_templates = [
+#     "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/5eb8636a79f886f204485913_gtmpl_44f242991d48f5_4x6_front.pdf",
+#     "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/613ba39c6c92493d37b94bc4_4x6%20Retail%20front.pdf"
+# ]
 
-html_front_template_2 = "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/613ba39c6c92493d37b94bc4_4x6%20Retail%20front.pdf"
+# # Links for QR codes
+# links = [
+#     "https://example.com/promo-1",
+#     "https://example.com/promo-2"
+# ]
 
-# Links for A/B testing
-link_1 = "https://example.com/promo-1"
-link_2 = "https://example.com/promo-2"
+# Example HTML templates for the front of the postcards
+html_front_templates = [
+    "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/5eb8636a79f886f204485913_gtmpl_44f242991d48f5_4x6_front.pdf",
+    "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/613ba39c6c92493d37b94bc4_4x6%20Retail%20front.pdf",
+    "https://cdn.prod.website-files.com/5e1e5c62fa3d44c96b4170a1/5eb8617e074356eea7fd19ea_gtmpl_2aac2ec6d39026_4x6_front.pdf"
+]
+
+# Links for QR codes
+links = [
+    "https://example.com/promo-1",
+    "https://example.com/promo-2",
+    "https://example.com/promo-3"
+]
+
 
 # Function to generate a QR code as base64
 def generate_qr_code(link):
@@ -19,11 +37,10 @@ def generate_qr_code(link):
     buffer.seek(0)
     return f"data:image/png;base64,{base64.b64encode(buffer.read()).decode('utf-8')}"
 
-# Generate QR codes for each link
-qr_code_1 = generate_qr_code(link_1)
-qr_code_2 = generate_qr_code(link_2)
+# Generate QR codes dynamically
+qr_codes = [generate_qr_code(link) for link in links]
 
-# HTML templates
+# HTML back template
 html_back_template = """
 <html>
   <body>
